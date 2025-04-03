@@ -1,0 +1,110 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-4 mb-4 mb-lg-0">
+        <div class="card sticky-top" style="top: 20px; z-index: 1;">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Your CV Analysis</h4>
+            </div>
+            <div class="card-body">
+                <div class="mb-4">
+                    <h5><i class="fas fa-tools me-2"></i>Skills</h5>
+                    <div class="skills-container mt-2">
+                        {% for skill in skills %}
+                        <span class="badge bg-light text-dark me-2 mb-2 p-2">{{ skill }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <h5><i class="fas fa-briefcase me-2"></i>Experience</h5>
+                    <ul class="list-unstyled mt-2">
+                        {% for exp in experience %}
+                        <li class="mb-2"><i class="fas fa-circle-dot me-2 text-secondary"></i>{{ exp }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                
+                <div>
+                    <h5><i class="fas fa-graduation-cap me-2"></i>Education</h5>
+                    <ul class="list-unstyled mt-2">
+                        {% for edu in education %}
+                        <li class="mb-2"><i class="fas fa-circle-dot me-2 text-secondary"></i>{{ edu }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="mt-4">
+                    <a href="{{ url_for('index') }}" class="btn btn-outline-primary w-100">
+                        <i class="fas fa-upload me-2"></i>Upload New CV
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-8">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="mb-0">Recommended Jobs</h2>
+            <div class="badge bg-primary">{{ matched_jobs|length }} matches found</div>
+        </div>
+        
+        {% if matched_jobs %}
+            {% for job in matched_jobs %}
+            <div class="card job-card mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <h3 class="card-title mb-0">{{ job.title }}</h3>
+                        <div class="match-badge" data-match="{{ job.match_percentage }}">
+                            <div class="match-circle">
+                                <span class="match-text">{{ job.match_percentage }}%</span>
+                            </div>
+                            <span class="match-label">Match</span>
+                        </div>
+                    </div>
+                    
+                    <h5 class="company-name text-muted mb-3">
+                        <i class="fas fa-building me-2"></i>{{ job.company }}
+                    </h5>
+                    
+                    <div class="mb-3">
+                        <span class="location-badge">
+                            <i class="fas fa-map-marker-alt me-1"></i>{{ job.location }}
+                        </span>
+                    </div>
+                    
+                    <p class="job-description mb-3">{{ job.description }}</p>
+                    
+                    <div class="mb-3">
+                        <h6>Required Skills:</h6>
+                        <div class="skills-container">
+                            {% for skill in job.skills_required %}
+                            <span class="badge {% if skill|lower in skills|join(' ')|lower %}bg-success{% else %}bg-light text-dark{% endif %} me-2 mb-2 p-2">{{ skill }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                    <div class="text-end mt-3">
+                        <button class="btn btn-outline-primary">
+                            <i class="fas fa-external-link-alt me-2"></i>Apply Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="card">
+                <div class="card-body text-center py-5">
+                    <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                    <h3>No matching jobs found</h3>
+                    <p class="text-muted">Try uploading a different CV or updating your skills.</p>
+                    <a href="{{ url_for('index') }}" class="btn btn-primary mt-3">
+                        <i class="fas fa-upload me-2"></i>Upload New CV
+                    </a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,258 @@
+:root {
+    /* Professional color palette */
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --accent-color: #1abc9c;
+    --light-color: #ecf0f1;
+    --dark-color: #2c3e50;
+    --danger-color: #e74c3c;
+    --success-color: #2ecc71;
+    --warning-color: #f39c12;
+    --text-color: #34495e;
+    --border-color: #ddd;
+    --gray-light: #f8f9fa;
+    --gray-medium: #e9ecef;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-color);
+    background-color: var(--gray-light);
+    line-height: 1.6;
+}
+
+/* Navbar styling */
+.navbar {
+    background-color: var(--primary-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+/* Cards styling */
+.card {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    font-weight: 600;
+}
+
+/* Hero card */
+.hero-card {
+    background: linear-gradient(120deg, var(--primary-color), var(--dark-color));
+    color: white;
+    margin-bottom: 2rem;
+}
+
+/* Upload area styling */
+.upload-card {
+    max-width: 500px;
+    background-color: white;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.upload-area {
+    border: 2px dashed var(--border-color);
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.upload-area:hover, .upload-area.dragover {
+    border-color: var(--secondary-color);
+    background-color: rgba(52, 152, 219, 0.05);
+}
+
+.upload-area i {
+    color: var(--secondary-color);
+}
+
+/* Button styling */
+.btn-primary {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    padding: 0.5rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background-color: #2980b9;
+    border-color: #2980b9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.btn-outline-primary {
+    color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    font-weight: 600;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+/* Feature icons */
+.feature-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: var(--gray-medium);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+}
+
+/* Check list */
+.check-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.check-list li {
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 0;
+}
+
+/* Loading overlay */
+#loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Results page styling */
+.job-card {
+    position: relative;
+}
+
+.company-name {
+    font-weight: 500;
+}
+
+.location-badge {
+    display: inline-block;
+    background-color: var(--gray-light);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.skills-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.badge {
+    font-weight: 500;
+    font-size: 0.85rem;
+}
+
+/* Match percentage badge */
+.match-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.match-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    background-color: #dff7ed;
+    color: var(--accent-color);
+}
+
+.match-text {
+    font-size: 1.1rem;
+}
+
+.match-label {
+    font-size: 0.8rem;
+    color: var(--text-color);
+    margin-top: 0.2rem;
+}
+
+/* Match percentage colors */
+[data-match="100"] .match-circle, 
+[data-match="90"] .match-circle {
+    background-color: #d4edda;
+    color: #28a745;
+}
+
+[data-match="80"] .match-circle, 
+[data-match="70"] .match-circle {
+    background-color: #d1ecf1;
+    color: #17a2b8;
+}
+
+[data-match="60"] .match-circle, 
+[data-match="50"] .match-circle {
+    background-color: #fff3cd;
+    color: #ffc107;
+}
+
+[data-match="40"] .match-circle, 
+[data-match="30"] .match-circle {
+    background-color: #f8d7da;
+    color: #dc3545;
+}
+
+/* Footer styling */
+.footer {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1.5rem 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .match-badge {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+    }
+    
+    .match-circle {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .job-card .card-title {
+        padding-right: 60px;
+    }
+}
