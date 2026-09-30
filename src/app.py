@@ -24,6 +24,7 @@ app.secret_key = os.environ.get("SESSION_SECRET") or os.urandom(32)
 # Configure upload settings
 ALLOWED_EXTENSIONS = {'pdf', 'docx'}
 MAX_CONTENT_LENGTH = 16 * 1024 * 1024  # 16MB max file size
+app.config["MAX_CONTENT_LENGTH"] = MAX_CONTENT_LENGTH
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
