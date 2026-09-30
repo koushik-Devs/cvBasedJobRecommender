@@ -19,7 +19,7 @@ jobs_collection = db["jobs"]
 
 # Create Flask app
 app = Flask(__name__)
-app.secret_key = os.environ.get("SESSION_SECRET", "dev_secret_key")
+app.secret_key = os.environ.get("SESSION_SECRET") or os.urandom(32)
 
 # Configure upload settings
 ALLOWED_EXTENSIONS = {'pdf', 'docx'}
@@ -122,4 +122,4 @@ def too_large(e):
     return redirect(url_for('index'))
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=False)
