@@ -38,7 +38,6 @@ def extract_text_from_pdf(file_path):
             for page in pdf.pages:
                 text += page.extract_text()
 
-            print(f"\n\n\n\n{text}\n\n\n\n")
             return text
     except Exception as e:
         logging.error(f"Error extracting text from PDF: {str(e)}")
@@ -60,11 +59,7 @@ def extract_skills(cv_text):
     """Extract skills and other relevant information from CV text using Groq."""
     if not GROQ_API_KEY:
         logging.error("Groq API key not found")
-        return {
-            "skills": ["Error: API key required"],
-            "experience": ["Error: API key required"],
-            "education": ["Error: API key required"]
-        }
+        raise RuntimeError("GROQ_API_KEY is not configured.")
     
     try:
         logging.debug("Calling Groq API to extract skills")
@@ -102,7 +97,6 @@ def extract_skills(cv_text):
         response_content = response.choices[0].message.content
         try:
             # Strip any non-JSON content (in case model includes explanations)
-            print(f"\n\n\n\n{response_content}\n\n\n\n")
             json_str = response_content
             # Find the first { and last }
             start_idx = response_content.find('{')
@@ -122,15 +116,15 @@ def extract_skills(cv_text):
                 
             return skills_data
         except json.JSONDecodeError:
-            logging.error(f"Failed to parse JSON from response: {response_content}")
+            logging.error("Failed to parse JSON from the model response.")
             return {
                 "skills": ["Error parsing response"],
                 "experience": ["Error parsing response"],
                 "education": ["Error parsing response"]
             }
     
-    except Exception as e:
-        logging.error(f"Error extracting skills with Groq: {str(e)}")
+    except Exception:
+        logging.exception("Error extracting skills with Groq.")
         # Return error information in case of API failure
         return {
             "skills": ["Error extracting skills"],
